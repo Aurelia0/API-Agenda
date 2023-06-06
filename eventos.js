@@ -19,7 +19,7 @@ router.get('/usuario/:idusuario', async (req, res) => {
   const { idusuario } = req.params;
   try {
     const connection = await connectToDatabase();
-    const [rows] = await connection.query('SELECT * FROM evento WHERE idcliente IN (SELECT idcliente FROM cliente WHERE idusuario = ?)', [idusuario]);
+    const [rows] = await connection.query('SELECT * FROM evento WHERE idcliente IN (SELECT idcliente FROM evento WHERE idusuario = ?)', [idusuario]);
     res.json(rows);
   } catch (error) {
     console.error('Error al obtener los eventos de clientes del usuario:', error);
